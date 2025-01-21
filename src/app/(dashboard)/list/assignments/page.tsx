@@ -1,4 +1,5 @@
 "use client"
+import FormModal from '@/components/FormModal';
 import PaginationPage from '@/components/Pagination';
 import Table from '@/components/Table';
 import TableSearch from '@/components/TableSearch';
@@ -6,7 +7,7 @@ import { role, examsData, assignmentsData } from '@/lib/data';
 import Image from 'next/image';
 import Link from 'next/link';
 
-type Assignments = {
+type Assignment = {
     id: number;
     subject: string;
     class: number;
@@ -41,7 +42,7 @@ const columns = [
       },
 ];
 const AssignmentsListPage = () => {
-    const renderRaw = (item: Assignments) => (
+    const renderRaw = (item: Assignment) => (
         <tr
         key={item.id}
         className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-lamaPurpleLight"
@@ -52,15 +53,12 @@ const AssignmentsListPage = () => {
         <td className="hidden md:table-cell">{item.dueDate}</td>
         <td>
           <div className='flex items-center gap-2 self-end'>
-            <Link href={`/list/teacher/${item.id}`}>
-              <button className='w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky'>
-                <Image src="/edit.png" alt="" width={16} height={16} />
-              </button>
-            </Link>
+          
             {role === "admin" && (
-              <button className='w-7 h-7 flex items-center justify-center rounded-full bg-lamaPurple'>
-              <Image src="/delete.png" alt="" width={16} height={16} />
-            </button>
+            <>
+              <FormModal table="assignment" type="update" data={item} />
+              <FormModal table="assignment" type="delete" id={item.id} />
+            </>
             )}
           </div>
         </td>
@@ -78,12 +76,12 @@ const AssignmentsListPage = () => {
             <button className='w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow'>
               <Image src="/filter.png" alt=" " width={20} height={20} />
             </button>
-            <button>
+            <button className='w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow'>
               <Image src="/sort.png" alt=" " width={20} height={20} />
             </button>
-            {role === "admin" && (<button>
-              <Image src="/plus.png" alt=" " width={20} height={20} />
-            </button>)}
+            {role === "admin" && (
+              <FormModal table="assignment" type="create" /> 
+            )}
           </div>
         </div>
       </div>
