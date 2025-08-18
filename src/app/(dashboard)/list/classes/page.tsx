@@ -1,4 +1,4 @@
-"use client"
+// "use client";
 import FormModal from '@/components/FormModal';
 import PaginationPage from '@/components/Pagination';
 import Table from '@/components/Table';
@@ -8,7 +8,6 @@ import prisma from '@/lib/prisma';
 import { ITEM_PER_PAGE } from '@/lib/settings';
 import { Class, Prisma, Teacher } from '@prisma/client';
 import Image from 'next/image';
-import Link from 'next/link';
 
 type ClassList = Class & {supervisor: Teacher};
 
@@ -61,7 +60,7 @@ const renderRaw = (item: ClassList) => (
   </td>
 </tr>
 );
-// eslint-disable-next-line @next/next/no-async-client-component
+
 const ClassListPage = async ({
   searchParams,
 }: {
@@ -99,7 +98,7 @@ const [data, count] = await prisma.$transaction([
     take: ITEM_PER_PAGE,
     skip: ITEM_PER_PAGE * (p - 1),
   }),
-  prisma.subject.count({ where: query }),
+  prisma.class.count({ where: query }),
 ]);
 
 return (

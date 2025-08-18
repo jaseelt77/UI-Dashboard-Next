@@ -107,7 +107,7 @@ const ResultListPage = () => {
       {/* LIST */}
       <Table columns={columns} renderRaw={renderRaw} data={resultsData} />
       {/* PAGINATION */}
-      <PaginationPage />
+      <PaginationPage page={0} count={0} />
     </div>
   )
 }

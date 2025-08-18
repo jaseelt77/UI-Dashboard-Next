@@ -88,7 +88,7 @@ const AssignmentsListPage = () => {
       {/* LIST */}
       <Table columns={columns} renderRaw={renderRaw} data={assignmentsData} />
       {/* PAGINATION */}
-      <PaginationPage />
+      <PaginationPage page={0} count={0} />
     </div>
   )
 }
