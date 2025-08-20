@@ -1,4 +1,3 @@
-// "use client"
 import FormModal from '@/components/FormModal';
 import PaginationPage from '@/components/Pagination';
 import Table from '@/components/Table';
@@ -11,6 +10,7 @@ import { ITEM_PER_PAGE } from '@/lib/settings';
 import { Lesson, Subject, Class, Teacher, Prisma } from '@prisma/client';
 // import { useSearchParams } from "next/navigation";
 
+export const dynamic = "force-dynamic";
 type LessonList = Lesson & {  subject: Subject } & { class :  Class } & { 
   teacher : Teacher; 
 };
